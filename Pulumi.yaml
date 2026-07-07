@@ -1,0 +1,30 @@
+name: guestbook-monitoring
+runtime: nodejs
+description: >-
+  Pulumi Kubernetes Guestbook (redis + PHP frontend) extended with a
+  Prometheus + Grafana monitoring stack via the kube-prometheus-stack Helm chart.
+
+config:
+  guestbook-monitoring:useLoadBalancer:
+    description: >-
+      true to expose the guestbook frontend and Grafana as cloud LoadBalancers.
+      Set to false for Minikube / kind (NodePort-style ClusterIP access).
+    default: true
+  guestbook-monitoring:grafanaAdminPassword:
+    description: Grafana admin password (stored as a Pulumi secret).
+    secret: true
+    default: prom-operator
+  guestbook-monitoring:localKindCluster:
+    description: >-
+      true when running on a local kind cluster. Disables control-plane
+      ServiceMonitors (controller-manager, etcd, proxy, scheduler) that cannot
+      be scraped on kind.
+    default: false
+  guestbook-monitoring:grafanaNodePort:
+    description: >-
+      Pinned NodePort for Grafana when useLoadBalancer=false (30000-32767).
+      Used by scripts/deploy.sh / kind to map a stable localhost URL.
+  guestbook-monitoring:frontendNodePort:
+    description: >-
+      Pinned NodePort for the Guestbook frontend when useLoadBalancer=false
+      (30000-32767). Used by scripts/deploy.sh / kind to map a stable localhost URL.

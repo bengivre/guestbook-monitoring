@@ -1,0 +1,14 @@
+{
+  "name": "guestbook-monitoring",
+  "version": "1.0.0",
+  "description": "Pulumi Guestbook with Prometheus + Grafana monitoring",
+  "main": "src/index.ts",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "^3.113.0",
+    "@pulumi/kubernetes": "^4.11.0"
+  }
+}

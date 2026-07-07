@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": "src",
+    "outDir": "bin",
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "pretty": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*.ts"]
+}
