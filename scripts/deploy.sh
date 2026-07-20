@@ -251,6 +251,12 @@ pulumi config set grafanaNodePort  "$GRAFANA_NODE_PORT"
 pulumi config set frontendNodePort "$FRONTEND_NODE_PORT"
 pulumi config set --secret grafanaAdminPassword "$GRAFANA_ADMIN_PASSWORD"
 
+# Sync state with the live cluster so resources from a previous kind cluster
+# (e.g. namespaces) are recreated instead of skipped as "unchanged".
+info "Refreshing Pulumi state against the cluster…"
+pulumi refresh --yes
+ok "State refreshed."
+
 step "Deploying with Pulumi (this can take a few minutes)"
 if [[ "$ASSUME_YES" == true ]]; then
   pulumi up --yes

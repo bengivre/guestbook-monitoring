@@ -87,8 +87,9 @@ What it does, in order:
    host ports so they're reachable at `localhost`.
 3. Waits for all nodes (and kube-system pods) to be `Ready`.
 4. Logs into the Pulumi backend (local file backend by default — no account
-   needed), installs deps, selects/creates the stack, sets config, and runs
-   `pulumi up`.
+   needed), installs deps, selects/creates the stack, sets config, runs
+   `pulumi refresh` (so a recreated kind cluster does not leave stale
+   namespaces in state), then `pulumi up`.
 5. Prints the Guestbook URL, Grafana URL + admin credentials, and the verify
    command.
 

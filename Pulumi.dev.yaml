@@ -3,6 +3,6 @@ config:
   guestbook-monitoring:grafanaNodePort: "30080"
   guestbook-monitoring:frontendNodePort: "30081"
   guestbook-monitoring:grafanaAdminPassword:
-    secure: v1:IoKeE+ms0Ubx/z/K:wW/hyFX2XMdoLaZ7zRKJ0DoQ3xBr5IlDLB5RHwo=
+    secure: v1:lxXyuEepGN2Qqkr7:LbTjGgsj4IhEsrtvfbEKrxHtw6Ty3T0QdlRqEwQ=
   guestbook-monitoring:localKindCluster: "true"
 encryptionsalt: v1:pJDou/f5yzA=:v1:LXMC4sOAffaARTjd:ilSv41KCZnkgJGtqx7iqoIrg48foxg==
