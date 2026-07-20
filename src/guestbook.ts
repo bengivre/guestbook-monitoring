@@ -142,11 +142,6 @@ export class Guestbook extends pulumi.ComponentResource {
 
         // ---- ServiceMonitors: Prometheus scrapes exporter :metrics ports -------
         const smOpts = { parent: this, dependsOn: args.dependsOn };
-        const backendEndpoint = {
-            port: "metrics",
-            interval: "15s",
-            relabelings: [{ targetLabel: "tier", replacement: "backend" }],
-        };
         for (const [role] of [["leader", redisLeaderService], ["follower", redisFollowerService]] as const) {
             new k8s.apiextensions.CustomResource(`redis-${role}-sm`, {
                 apiVersion: "monitoring.coreos.com/v1",
@@ -158,7 +153,17 @@ export class Guestbook extends pulumi.ComponentResource {
                 },
                 spec: {
                     selector: { matchLabels: { app: "redis", role } },
-                    endpoints: [backendEndpoint],
+                    // Promote Service label onto series; also set via relabeling so
+                    // role is present even before targetLabels propagates.
+                    targetLabels: ["role"],
+                    endpoints: [{
+                        port: "metrics",
+                        interval: "15s",
+                        relabelings: [
+                            { targetLabel: "tier", replacement: "backend" },
+                            { targetLabel: "role", replacement: role },
+                        ],
+                    }],
                 },
             }, smOpts);
         }
